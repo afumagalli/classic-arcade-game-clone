@@ -10,7 +10,7 @@ var Enemy = function() {
     this.sprite = 'images/enemy-bug.png';
     this.x = -blockWidth;
     this.y = (Math.floor(Math.random() * (3 - 1 + 1)) + 1) * blockHeight;
-    this.speed = Math.random() * 500;
+    this.speed = Math.random() * (500 - 100) + 100;
 };
 
 // Update the enemy's position, required method for game
@@ -22,6 +22,7 @@ Enemy.prototype.update = function(dt) {
     if (this.x >= 5 * blockWidth) {
         this.x = -blockWidth;
         this.y = (Math.floor(Math.random() * (3 - 1 + 1)) + 1) * blockHeight;
+        this.speed = Math.random() * (500 - 100) + 100;
     }
     else {
         this.x = this.x + this.speed * dt;
@@ -42,7 +43,7 @@ var Player = function() {
 Player.prototype.update = function() {
     for (var i = 0; i < allEnemies.length; i++) {
         if (this.y === allEnemies[i].y) {
-            if (this.x <= allEnemies[i].x + 50 && this.x >= allEnemies[i].x) {
+            if (this.x <= allEnemies[i].x + 50 && this.x >= allEnemies[i].x - 50) {
                 this.x = blockWidth * 2;
                 this.y = blockHeight * 5;
             }
